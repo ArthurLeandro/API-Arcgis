@@ -28,13 +28,3 @@ body,
   height: 100%;
   width: 100%;
 }
-
-.esri-basemap-gallery{
-    margin-top: 50px;
-    width: 30px!important;
-}
-
-
-.esri-basemap-gallery__item-title{
-    display: none!important;
-}
