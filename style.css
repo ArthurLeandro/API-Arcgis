@@ -134,7 +134,7 @@ section>a:hover {
 .job {
 	display: flex;
 	justify-content: center;
-	background-color: var(--primary);
+	background-color: var(--secondary);
 }
 
 .job__title {
