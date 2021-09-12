@@ -4,8 +4,38 @@ require([
     "esri/layers/FeatureLayer",
     "esri/widgets/Search",
     "esri/widgets/BasemapToggle",
-    "esri/widgets/CoordinateConversion"
-  ], (WebMap, MapView, FeatureLayer, Search, BasemapToggle, CoordinateConversion) => {
+    "esri/widgets/CoordinateConversion",
+    "esri/layers/WMSLayer",
+    "esri/widgets/Legend"
+  ], (WebMap, MapView, FeatureLayer, Search, BasemapToggle, CoordinateConversion, WMSLayer, Legend) => {
+    
+    const layer = new WMSLayer({
+      url: "https://geoservicos.ibge.gov.br/geoserver/CGEO/wms?",
+      sublayers: [
+        {
+          name: "CGEO:C04_DensidPop2010_MG"
+        }
+      ]
+    });
+
+    const layer2 = new WMSLayer({
+      url: "https://geoservicos.ibge.gov.br/geoserver/CGEO/wms?",
+      sublayers: [
+        {
+          name: "CGEO:IDS_13_Indice_de_Qual_da_Agua_Regiao_Sud_1_2"
+        }
+      ]
+    });
+
+    const layer3 = new WMSLayer({
+      url: "https://geoservicos.ibge.gov.br/geoserver/CREN/wms?",
+      sublayers: [
+        {
+          name: "CREN:GeologiaDobraSE23"
+        }
+      ]
+    });
+
 
     const labelClass = {
         
@@ -52,9 +82,15 @@ require([
                 }
               }
             }
-          })
-        ]
+          }),
+         layer,
+         layer2,
+         layer3
+         
+        ],
+        
       }),
+      
       center: [-43.99257354541803, -19.92354808336378],
       zoom: 9
     });
