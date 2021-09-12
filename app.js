@@ -3,8 +3,9 @@ require([
     "esri/views/MapView",
     "esri/layers/FeatureLayer",
     "esri/widgets/Search",
-    "esri/widgets/BasemapToggle"
-  ], (WebMap, MapView, FeatureLayer, Search, BasemapToggle) => {
+    "esri/widgets/BasemapToggle",
+    "esri/widgets/CoordinateConversion"
+  ], (WebMap, MapView, FeatureLayer, Search, BasemapToggle, CoordinateConversion) => {
 
     const labelClass = {
         
@@ -65,6 +66,11 @@ require([
         nextBasemap: "hybrid" // allows for toggling to the 'hybrid' basemap
       });
 
+      var ccWidget = new CoordinateConversion({
+        view: view
+      })
+
+      view.ui.add(ccWidget, "bottom-left");
     // Adds the search widget to the top right corner of the view
     view.ui.add(
       new Search({
