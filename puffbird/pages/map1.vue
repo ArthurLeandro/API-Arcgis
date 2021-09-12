@@ -19,10 +19,42 @@ export default {
 			"esri/views/MapView",
 			"esri/layers/FeatureLayer",
 			"esri/widgets/Search",
-			"esri/widgets/BasemapToggle"
+			"esri/widgets/BasemapToggle",
+			"esri/widgets/CoordinateConversion",
+			"esri/layers/WMSLayer",
+			"esri/widgets/Legend"
 		], {
 			url:'https://js.arcgis.com/4.19/'
-		}).then(([WebMap,MapView,FeatureLayer,Search,BasemapToggle]) => {
+			
+		}).then(([WebMap, MapView, FeatureLayer, Search, BasemapToggle, CoordinateConversion, WMSLayer, Legend]) => {
+			const layer = new WMSLayer({
+				url: "https://geoservicos.ibge.gov.br/geoserver/CGEO/wms?",
+				sublayers: [
+					{
+						name: "CGEO:C04_DensidPop2010_MG"
+					}
+				]
+			});
+
+			const layer2 = new WMSLayer({
+				url: "https://geoservicos.ibge.gov.br/geoserver/CGEO/wms?",
+				sublayers: [
+					{
+						name: "CGEO:IDS_13_Indice_de_Qual_da_Agua_Regiao_Sud_1_2"
+					}
+				]
+			});
+
+			const layer3 = new WMSLayer({
+				url: "https://geoservicos.ibge.gov.br/geoserver/CREN/wms?",
+				sublayers: [
+					{
+						name: "CREN:GeologiaDobraSE23"
+					}
+				]
+			});
+
+
 			const labelClass = {
 				// autocasts as new LabelClass()
 				symbol: {
@@ -40,6 +72,7 @@ export default {
 					expression: "$feature.MARKER_ACTIVITY"
 				}
 			};
+
 			const view = new MapView({
 				container: "map__view",
 				map: new WebMap({
@@ -66,17 +99,30 @@ export default {
 									}
 								}
 							}
-						})
-					]
+						}),
+					layer,
+					// layer2,
+					// layer3
+					
+					],
+					
 				}),
+				
 				center: [-43.99257354541803, -19.92354808336378],
 				zoom: 9
 			});
+			
 			const toggle = new BasemapToggle({
 					// 2 - Set properties
 					view: view, // view that provides access to the map's 'topo-vector' basemap
 					nextBasemap: "hybrid" // allows for toggling to the 'hybrid' basemap
 				});
+
+				var ccWidget = new CoordinateConversion({
+					view: view,
+				})
+
+				view.ui.add(ccWidget, "bottom-left");
 			// Adds the search widget to the top right corner of the view
 			view.ui.add(
 				new Search({
@@ -84,7 +130,10 @@ export default {
 				}),
 				"top-right"
 			);
+
 			view.ui.add(toggle, "bottom-right");
+		}).catch(err =>{
+			console.log(err);
 		});
 		console.log("MOUNTED MAP 1")
 	}

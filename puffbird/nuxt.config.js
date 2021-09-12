@@ -38,6 +38,7 @@ export default {
 	modules: [
 		// https://go.nuxtjs.dev/axios
 		'@nuxtjs/axios',
+		'@nuxtjs/proxy',
 		[
 			'nuxt-mq', {
 				// Default breakpoint for SSR
@@ -52,7 +53,13 @@ export default {
 	],
 
 	// Axios module configuration: https://go.nuxtjs.dev/config-axios
-	axios: {},
+	axios: {
+		proxy: true
+	},
+
+	proxy: {
+		'/api/': { target: 'https://geoservicos.ibge.gov.br/', pathRewrite: { '^/api/': '' }, changeOrigin: true, }
+	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {
