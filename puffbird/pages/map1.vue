@@ -1,21 +1,18 @@
 <template>
 	<div>
-		<div v-if="$mq === 'lg'" class="map__header">
-			<p class="map__title">Mapa Global</p>
-			<p class="map__description">Pesquise localidades no mapa na barra presente na direita superior.</p>
-			<svg width="100" height="100" id="map__marker">
-				<polygon points="90,10 40,50 90,78"
-					style="fill:#4F3750;stroke:#8D8960;stroke-width:5;fill-rule:evenodd;" />Sorry, your browser does not support inline SVG.
-			</svg>
-		</div>
+		<MapHeader header="Mapa Global" description="Pesquise localidades no mapa na barra presente na direita superior"/>
 		<div id="map__view"></div>
 	</div>
 </template>
 
 <script>
 import {loadModules} from 'esri-loader'
+import MapHeader from '../components/MapHeader.vue';
 export default {
 	layout: "desktop",
+	components:{
+		MapHeader
+	},
 	mounted(){
 		loadModules([
 			"esri/WebMap",
