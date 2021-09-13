@@ -18,23 +18,6 @@ require([
       ]
     });
 
-    const layer2 = new WMSLayer({
-      url: "https://geoservicos.ibge.gov.br/geoserver/CGEO/wms?",
-      sublayers: [
-        {
-          name: "CGEO:IDS_13_Indice_de_Qual_da_Agua_Regiao_Sud_1_2"
-        }
-      ]
-    });
-
-    const layer3 = new WMSLayer({
-      url: "https://geoservicos.ibge.gov.br/geoserver/CREN/wms?",
-      sublayers: [
-        {
-          name: "CREN:GeologiaDobraSE23"
-        }
-      ]
-    });
 
 
     const labelClass = {
@@ -61,7 +44,7 @@ require([
       map: new WebMap({
         portalItem: {
           // autocasts as new PortalItem
-          id: "372b7caa8fe340b0a6300df93ef18a7e"
+          id: "83f57e64955b4ed1bb7612fa10004663"
         },
         layers: [
           new FeatureLayer({
@@ -83,9 +66,7 @@ require([
               }
             }
           }),
-         layer,
-         layer2,
-         layer3
+         layer
          
         ],
         
