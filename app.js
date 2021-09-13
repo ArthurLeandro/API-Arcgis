@@ -21,7 +21,6 @@ require([
 
 
     const labelClass = {
-        
       // autocasts as new LabelClass()
       symbol: {
         type: "text", // autocasts as new TextSymbol()
