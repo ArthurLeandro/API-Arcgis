@@ -96,4 +96,23 @@ require([
     );
 
     view.ui.add(toggle, "bottom-right");
+
+    view.when(function() {
+      // get the first layer in the collection of operational layers in the WebMap
+      // when the resources in the MapView have loaded.
+      var featureLayer = webmap.layers.getItemAt(0);
+
+      var legend = new Legend({
+        view: view,
+        layerInfos: [
+          {
+            layer: featureLayer,
+            title: "LEGENDA"
+          }
+        ]
+      });
+
+      // Add widget to the bottom right corner of the view
+      view.ui.add(legend, "top-right");
+    });
   });
